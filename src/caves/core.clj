@@ -1,5 +1,5 @@
 (ns caves.core
-  (:use [caves.world :only [random-world]])
+  (:use [caves.world :only [random-world smooth-world]])
   (:require [lanterna.screen :as s]))
 
 (def screen-size [80 24])
@@ -75,6 +75,7 @@
   (case input
     :enter     (assoc game :uis [(new UI :win)])
     :backspace (assoc game :uis [(new UI :lose)])
+    \s         (assoc game :world (smooth-world (:world game)))
     game))
 
 (defn get-input [game screen]
